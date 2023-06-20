@@ -3,6 +3,7 @@ import MatrixEffect from "./components/MatrixEffect"
 import { useEffect } from "react"
 import { COINS } from "./consts/coins"
 import Price from "./components/Price"
+import ChartCrypto from "./components/ChartCrypto"
 
 function App () {
 
@@ -48,9 +49,9 @@ function App () {
 
 
   return (
-    <div className="w-full min-h-screen relative bg-black flex justify-center items-center">
+    <div className="w-full min-h-screen relative bg-black flex justify-center items-center overflow-x-hidden">
       <MatrixEffect />
-      <div className="flex justify-center items-center relative z-10 bg-gray-800 max-w-6xl p-4 px-8 my-6 rounded-lg ">
+      <div className="flex flex-col justify-center items-center relative z-10 bg-gray-800 max-w-6xl p-4 px-8 my-6 rounded-lg ">
 
         <div className="flex flex-col gap-8 lg:flex-row">
           <div>
@@ -86,9 +87,17 @@ function App () {
               <h2 className="text-center text-white text-3xl font-bold mb-6"> {cryptoSelected} - {coinSelected}</h2>
               <Price data={cryptoInfo} />
               <img src={`https://www.cryptocompare.com/${cryptoInfo.IMAGEURL}`} alt="" className="w-24 mt-6" />
+
             </>}
           </div>
+
         </div>
+
+        {cryptoInfo &&
+          <div className="w-full">
+            <ChartCrypto crypto={"chiliz"} currency={coinSelected} />
+          </div>
+        }
 
       </div>
     </div>
