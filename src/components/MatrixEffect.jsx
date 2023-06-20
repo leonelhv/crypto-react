@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+// import { getRandomValueFromArray } from "../utils/randomValue";
 
 const MatrixEffect = () => {
     const canvasRef = useRef(null);
@@ -20,6 +21,7 @@ const MatrixEffect = () => {
 
             ypos.forEach((y, ind) => {
                 const text = String.fromCharCode(Math.random() * 128);
+                // const text = getRandomValueFromArray(["1", "0"]);
                 const x = ind * 20;
                 ctx.fillText(text, x, y);
                 if (y > 100 + Math.random() * 10000) ypos[ind] = 0;
@@ -34,7 +36,7 @@ const MatrixEffect = () => {
 
         window.addEventListener("resize", resizeHandler);
 
-        const intervalId = setInterval(matrix, 50);
+        const intervalId = setInterval(matrix, 90);
 
         return () => {
             clearInterval(intervalId);
@@ -42,7 +44,7 @@ const MatrixEffect = () => {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="absolute -z-0">Canvas is not supported in your browser.</canvas>;
+    return <canvas ref={canvasRef} className="absolute top-0 -z-0">Canvas is not supported in your browser.</canvas>;
 };
 
 export default MatrixEffect;
