@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-// import { getRandomValueFromArray } from "../utils/randomValue";
 
 const MatrixEffect = () => {
     const canvasRef = useRef(null);
@@ -7,8 +6,8 @@ const MatrixEffect = () => {
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
-        let w = canvas.width = document.body.offsetWidth;
-        let h = canvas.height = document.body.offsetHeight;
+        let w = (canvas.width = window.innerWidth);
+        let h = (canvas.height = window.innerHeight);
         const cols = Math.floor(w / 20) + 1;
         const ypos = Array(cols).fill(0);
 
@@ -21,7 +20,6 @@ const MatrixEffect = () => {
 
             ypos.forEach((y, ind) => {
                 const text = String.fromCharCode(Math.random() * 128);
-                // const text = getRandomValueFromArray(["1", "0"]);
                 const x = ind * 20;
                 ctx.fillText(text, x, y);
                 if (y > 100 + Math.random() * 10000) ypos[ind] = 0;
@@ -30,8 +28,8 @@ const MatrixEffect = () => {
         };
 
         const resizeHandler = () => {
-            w = canvas.width = document.body.offsetWidth;
-            h = canvas.height = document.body.offsetHeight;
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
         };
 
         window.addEventListener("resize", resizeHandler);
@@ -44,7 +42,15 @@ const MatrixEffect = () => {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="absolute top-0 -z-0">Canvas is not supported in your browser.</canvas>;
+    return (
+        <canvas
+            ref={canvasRef}
+            className="absolute top-0 left-0"
+            style={{ position: "fixed" }}
+        >
+            Canvas is not supported in your browser.
+        </canvas>
+    );
 };
 
 export default MatrixEffect;
